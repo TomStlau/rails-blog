@@ -4,5 +4,7 @@
     <%= @article.body %>
 </p>
 <p>
-    <%= link_to 'Back', articles_path %>
+    <%= button_to 'Back', articles_path, method: :get  %>
+
+    <%= button_to 'Edit', edit_article_path(@article), method: :get %>
 </p>
