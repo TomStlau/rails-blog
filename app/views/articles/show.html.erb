@@ -7,4 +7,37 @@
     <%= button_to 'Back', articles_path, method: :get  %>
 
     <%= button_to 'Edit', edit_article_path(@article), method: :get %>
-</p>
+
+    <%= button_to 'Delete', article_path(@article), method: :delete, data: { turbo_confirm: 'Are you sure?' } %>
+
+</p>    
+
+<h3>Comments</h3>
+
+<% @article.comments.each do |comment| %>
+    <p>
+        <strong>Commenter:</strong>
+        <%= comment.commenter %>
+    </p>
+    <p>
+        <strong>Comment:</strong>
+        <%= comment.body %>
+    </p>
+    
+<% end %>
+
+<h3>Add a Comment</h3>
+
+<%= form_with model: [ @article, @article.comments.build ] do |form| %>
+    <p>
+        <%= form.label :commenter %><br>
+        <%= form.text_field :commenter %>
+    </p>
+    <p>
+        <%= form.label :body %><br>
+        <%= form.text_area :body %>
+    </p>
+    <p>
+        <%= form.submit %>
+        
+<% end %>
